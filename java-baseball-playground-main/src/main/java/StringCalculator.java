@@ -5,27 +5,27 @@ public class StringCalculator {
         String[] expression = separate(str);
         int result = toInt(expression[0]);
         for (int i = 0; i < expression.length - 2; i = i + 2) {
-            result = calculate(result, expression[i + 1], expression[i + 2]);
+            result = calculate(result, expression[i + 1], toInt(expression[i + 2]));
         }
         return result;
     }
 
-    private int calculate(int result, String operation, String secondValue) {
+    private int calculate(int result, String operation, int value) {
 
         if (Operation.PLUS.getValue().equals(operation)) {
-            return plus(result, toInt(secondValue));
+            return plus(result, value);
         }
 
         if (Operation.MINUS.getValue().equals(operation)) {
-            return minus(result, toInt(secondValue));
+            return minus(result, value);
         }
 
         if (Operation.MULTIPLY.getValue().equals(operation)) {
-            return multiply(result, toInt(secondValue));
+            return multiply(result, value);
         }
 
         if (Operation.DIVIDE.getValue().equals(operation)) {
-            return divide(result, toInt(secondValue));
+            return divide(result, value);
         }
         throw new IllegalArgumentException();
     }
