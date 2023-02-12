@@ -5,6 +5,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         char[] randomNumber = RandomBaseballNumber.generate()
                 .getValue()
@@ -57,10 +58,13 @@ public class Main {
 
                 throw new IllegalArgumentException(String.format("올바르지 않은 값(%d)입니다", statusValue));
             }
+            if (strikeCount + ballCount == 0) {
+                System.out.println("낫싱");
+                continue;
+            }
+
             System.out.println(String.format("%d스트라이크 %d볼", strikeCount, ballCount));
         }
-
         scanner.close();
-
     }
 }
