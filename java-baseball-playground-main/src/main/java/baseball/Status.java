@@ -10,7 +10,16 @@ public enum Status {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
+
+    public static boolean isContinue(int value) {
+        if (CONTINUE.value == value) {
+            return true;
+        }
+
+        if (EXIT.value == value) {
+            return false;
+        }
+        throw new IllegalArgumentException(String.format("올바르지 않은 입력값(%d)입니다", value));
     }
 }
+

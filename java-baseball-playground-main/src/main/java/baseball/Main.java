@@ -5,65 +5,33 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
-        char[] randomNumber = RandomBaseballNumber.generate()
-                .getValue()
-                .toString()
-                .toCharArray();
+        BaseballNumber target = BaseballNumber.generateRandomNumber();
         while (true) {
+
             System.out.print("숫자를 입력해주세요: ");
 
-            Map<String, Integer> result = new HashMap<>();
-
-            char[] inputNumber = scanner.nextLine()
-                    .toCharArray();
+            BaseballNumber input = BaseballNumber.generate(
+                    String.valueOf(scanner.nextInt()).toCharArray()
+            );
 
             // 숫자 검증 및 출력
-            for (int i = 0; i < randomNumber.length; i++) {
-                for (int j = 0; j < inputNumber.length; j++) {
-                    if (randomNumber[i] == inputNumber[j]) {
-                        if (i == j) {
-                            Integer strike = result.getOrDefault("스트라이크", 0);
-                            result.put("스트라이크", strike + 1);
-                            break;
-                        }
-                        Integer ball = result.getOrDefault("볼", 0);
-                        result.put("볼", ball + 1);
-                    }
-                }
+            Baseball baseball = Baseball.makeBaseballByNumber(target, input);
 
-            }
-            Integer strikeCount = result.getOrDefault("스트라이크",0);
-            Integer ballCount = result.getOrDefault("볼",0);
-
-            if (3 == strikeCount) {
-
-                // 게임을 다시할지 안할지 여부
-
+            if (baseball.isStrikeOut()) {
+                // 게임을 계속할지 안할지
                 System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로시작하려면 1, 종료하려면 2를 입력하세요.");
-                int statusValue = scanner.nextInt();
-
-                if (Status.CONTINUE.getValue() == statusValue) {
-                    randomNumber = RandomBaseballNumber.generate()
-                            .getValue()
-                            .toString()
-                            .toCharArray();
+                if (Status.isContinue(scanner.nextInt())) {
+                    target = BaseballNumber.generateRandomNumber();
                     continue;
                 }
-
-                if (Status.EXIT.getValue() == statusValue) {
-                    break;
-                }
-
-                throw new IllegalArgumentException(String.format("올바르지 않은 값(%d)입니다", statusValue));
+                break;
             }
-            if (strikeCount + ballCount == 0) {
-                System.out.println("낫싱");
+            if (baseball.isNothing()) {
+                System.out.println(BaseballEnum.낫싱);
                 continue;
             }
-
-            System.out.println(String.format("%d스트라이크 %d볼", strikeCount, ballCount));
+            System.out.println(String.format("%d%s %d%s", baseball.getStrike(), BaseballEnum.스트라이크, baseball.getBall(), BaseballEnum.볼));
         }
         scanner.close();
     }
