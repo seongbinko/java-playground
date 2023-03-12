@@ -1,9 +1,6 @@
 package baseball;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class PlayResult {
 
@@ -24,5 +21,20 @@ public class PlayResult {
     @Override
     public int hashCode() {
         return Objects.hash(playResult);
+    }
+
+
+    @Override
+    public String toString() {
+        int ball = this.playResult.get(BaseBallStatus.BALL);
+        int strike = this.playResult.get(BaseBallStatus.STRIKE);
+        if (isRight(ball, strike)) {
+            return strike + BaseBallStatus.STRIKE.name() + " " + ball + BaseBallStatus.BALL.name();
+        }
+        return BaseBallStatus.NOTHING.name();
+    }
+
+    private boolean isRight(int ball, int strike) {
+        return ball + strike != 0;
     }
 }
