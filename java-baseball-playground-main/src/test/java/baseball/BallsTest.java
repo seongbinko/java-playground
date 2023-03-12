@@ -12,6 +12,7 @@ public class BallsTest {
 
     Balls fixedBalls;
 
+
     @BeforeEach
     void init() {
         fixedBalls = new Balls(
@@ -36,7 +37,7 @@ public class BallsTest {
 
     @Test
     void one_ball_result() {
-        PlayResult playResult = fixedBalls.play(Arrays.asList(2, 5, 8)); //
+        PlayResult playResult = fixedBalls.play("258"); //
         Assertions.assertEquals(new PlayResult(Map.of(
                 BaseBallStatus.BALL,1,
                 BaseBallStatus.STRIKE,0
@@ -45,7 +46,7 @@ public class BallsTest {
 
     @Test
     void one_strike_result() {
-        PlayResult playResult = fixedBalls.play(Arrays.asList(1, 4, 5)); //
+        PlayResult playResult = fixedBalls.play("145"); //
         Assertions.assertEquals(new PlayResult(Map.of(
                 BaseBallStatus.BALL,0,
                 BaseBallStatus.STRIKE,1
@@ -54,7 +55,7 @@ public class BallsTest {
 
     @Test
     void nothing_result() {
-        PlayResult playResult = fixedBalls.play(Arrays.asList(4,5,6)); //
+        PlayResult playResult = fixedBalls.play("456"); //
         Assertions.assertEquals(new PlayResult(Map.of(
                 BaseBallStatus.BALL,0,
                 BaseBallStatus.STRIKE,0

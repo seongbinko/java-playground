@@ -1,8 +1,6 @@
 package baseball;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -21,11 +19,13 @@ public class Balls {
         ).collect(Collectors.toList());
     }
 
-    public static List<Ball> generateUserBalls(List<Integer> inputs) {
-        AtomicInteger index = new AtomicInteger();
-        return inputs.stream().map(
-                number -> new Ball(index.getAndIncrement(), number)
-        ).collect(Collectors.toList());
+    public static List<Ball> generateUserBalls(String input) {
+        List<Ball> balls = new ArrayList<>();
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            balls.add(new Ball(i, chars[i] - '0'));
+        }
+        return balls;
     }
 
     public boolean isStrike(Ball ball) {
@@ -47,7 +47,7 @@ public class Balls {
     }
 
 
-    public PlayResult play(List<Integer> inputs) {
+    public PlayResult play(String inputs) {
         return new PlayResult(mapTo(generateUserBalls(inputs)));
     }
 
