@@ -49,10 +49,6 @@ public class Ball {
         return Objects.hash(position, number);
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public boolean isSameNumber(Ball ball) {
         return this.number == ball.number;
     }

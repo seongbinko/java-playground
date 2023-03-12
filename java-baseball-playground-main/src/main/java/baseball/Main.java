@@ -5,8 +5,9 @@ import baseball.view.OutPutView;
 
 public class Main {
     public static void main(String[] args) {
-        PlayResult playResult = new Balls(Balls.generateComputerBalls())
-                .play(InputView.input());
-        OutPutView.printPlayResult(playResult);
+        BaseBallController baseBallController = new BaseBallController();
+        while (baseBallController.isRunning()) {
+            baseBallController.start();
+        }
     }
 }

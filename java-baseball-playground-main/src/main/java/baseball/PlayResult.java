@@ -37,4 +37,8 @@ public class PlayResult {
     private boolean isRight(int ball, int strike) {
         return ball + strike != 0;
     }
+
+    public boolean isAnswer() {
+        return this.playResult.get(BaseBallStatus.STRIKE) == 3;
+    }
 }
