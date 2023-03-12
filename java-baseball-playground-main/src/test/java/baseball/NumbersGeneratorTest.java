@@ -9,7 +9,7 @@ import java.util.List;
 public class NumbersGeneratorTest {
 
     @Test
-    void 서로_다른_세개의_수() {
+    void individual_3_numbers() {
         List<Integer> numbers = NumbersGenerator.generate();
 
         Assertions.assertEquals(3, numbers.size());
